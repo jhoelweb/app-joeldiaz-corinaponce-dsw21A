@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -19,13 +20,17 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 
 import com.example.openwheather.ui.WeatherUiState
 import com.example.openwheather.ui.WeatherViewModel
 import com.example.openwheather.ui.theme.OpenWheatherTheme
+
 private const val OPEN_WEATHER_API_KEY = "551cbc9b56c2e57b180724bf13083953"
+
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,12 +60,14 @@ fun WeatherScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .background(Color(0xFF87CEEB)) // <-- Agregado fondo celeste (Sky Blue)
             .padding(24.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
         Text(
-            text = "Open Weather"
+            text = "Open Weather",
+            fontWeight = FontWeight.Bold // <-- Negrita
         )
 
         Spacer(
@@ -69,7 +76,8 @@ fun WeatherScreen(
 
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
 
             OutlinedTextField(
@@ -92,7 +100,10 @@ fun WeatherScreen(
                     )
                 }
             ) {
-                Text("Buscar")
+                Text(
+                    text = "Buscar",
+                    fontWeight = FontWeight.Bold // <-- Negrita
+                )
             }
         }
 
@@ -105,7 +116,8 @@ fun WeatherScreen(
             is WeatherUiState.Idle -> {
 
                 Text(
-                    text = "Escribe una ciudad para consultar el clima"
+                    text = "Escribe una ciudad para consultar el clima",
+                    fontWeight = FontWeight.Bold // <-- Negrita
                 )
             }
 
@@ -117,41 +129,49 @@ fun WeatherScreen(
             is WeatherUiState.Success -> {
 
                 Text(
-                    text = "Ciudad: ${state.weather.name}"
+                    text = "Ciudad: ${state.weather.name}",
+                    fontWeight = FontWeight.Bold // <-- Negrita
                 )
 
                 Text(
-                    text = "Temperatura: ${state.weather.main.temp} °C"
+                    text = "Temperatura: ${state.weather.main.temp} °C",
+                    fontWeight = FontWeight.Bold // <-- Negrita
                 )
 
                 Text(
-                    text = "Sensación térmica: ${state.weather.main.feels_like} °C"
+                    text = "Sensación térmica: ${state.weather.main.feels_like} °C",
+                    fontWeight = FontWeight.Bold // <-- Negrita
                 )
 
                 Text(
-                    text = "Humedad: ${state.weather.main.humidity}%"
+                    text = "Humedad: ${state.weather.main.humidity}%",
+                    fontWeight = FontWeight.Bold // <-- Negrita
                 )
 
                 Text(
-                    text = "Presión: ${state.weather.main.pressure} hPa"
+                    text = "Presión: ${state.weather.main.pressure} hPa",
+                    fontWeight = FontWeight.Bold // <-- Negrita
                 )
 
                 Text(
                     text = "Condición: ${
                         state.weather.weather.firstOrNull()?.description
                             ?: "Sin información"
-                    }"
+                    }",
+                    fontWeight = FontWeight.Bold // <-- Negrita
                 )
 
                 Text(
-                    text = "Viento: ${state.weather.wind.speed} m/s"
+                    text = "Viento: ${state.weather.wind.speed} m/s",
+                    fontWeight = FontWeight.Bold // <-- Negrita
                 )
             }
 
             is WeatherUiState.Error -> {
 
                 Text(
-                    text = state.message
+                    text = state.message,
+                    fontWeight = FontWeight.Bold // <-- Negrita
                 )
             }
         }
